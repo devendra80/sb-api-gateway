@@ -1,0 +1,16 @@
+server:
+  port: 8085 # Gateway port
+spring:
+  application:
+    name: API-GATEWAY-SERVICE # Gateway application name
+  cloud:
+    gateway:
+      routes:
+        - id: employee-service # Unique ID for the route
+          uri: http://localhost:8083 # URI of the microservice
+          predicates:
+            - Path=/employees/** # Route requests with path /employees/** to this service
+        - id: customer-service # Another unique ID for the second route
+          uri: http://localhost:8082 # URI of the second microservice
+          predicates:
+            - Path=/customers/** # Route requests with path /orders/** to this service
